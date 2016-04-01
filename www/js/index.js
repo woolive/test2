@@ -24,6 +24,7 @@ $(document).on("pageshow", function () {
         } else if ($("#updateRucher").length == 1) {
             var numero = sessionStorage.getItem("numero");
             if (numero && numero.length > 0) {
+                $("#numero").val(numero);
                 $.ajax({
                     type:"GET",
                     url: "http://apiculture.homelinux.com:8080/abeille/rest/getrucher.php",
@@ -38,7 +39,6 @@ $(document).on("pageshow", function () {
                     success: function(data){
                         if (data) {
                             console.log("rucher "+numero+" has data "+data);
-                            $("#numero").val(data.numero);
                             $("#colonies").val(data.colonie_prod);
                             bindUpdateRucherEvents();
                         } else {
@@ -240,7 +240,6 @@ function bindLoginEvents() {
 function bindLogoutEvents() {
     $("#logout").on("click", function () {
         localStorage.login="false";
-        window.location.href = "login.html";
     });
 }
 
