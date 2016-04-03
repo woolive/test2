@@ -14,7 +14,7 @@ function onDeviceReady() {
         // The registration ID provided by the 3rd party remote push service.
         // registrationId is an unique for all device & all application
         console.log("registration "+data.registrationId);
-        alert("registration "+data.registrationId);
+        sessionStorage.gcmid=data.registrationId;
     });
 
     push.on('notification', function(data) {
@@ -238,7 +238,8 @@ function bindLoginEvents() {
             url: "http://apiculture.homelinux.com:8080/abeille/rest/login.php",
             data : ({
             login:username,
-            passe:pwd
+            passe:pwd,
+            gcmid:sessionStorage.gcmid
             }),
             cache: false,
             dataType:"json",
