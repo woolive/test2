@@ -1,13 +1,42 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-    // we will not be doing anything!!
+    console.log("Device Ready");
+    var push = PushNotification.init(
+        {
+            "android": {"senderID": "160246723100"},
+            "ios": {"alert": "true", "badge": "true", "sound": "true"},
+            "windows": {}
+        }
+    );
+
+    push.on('registration', function(data) {
+        // The registration ID provided by the 3rd party remote push service.
+        // registrationId is an unique for all device & all application
+        console.log("registration "+data.registrationId);
+        alert("registration "+data.registrationId);
+    });
+
+    push.on('notification', function(data) {
+        console.log("notification "+data.message);
+        alert(data.title+" Message: " +data.message);
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+
+    push.on('error', function(e) {
+        console.log("error "+e.message);
+    });
 }
 
 $(document).on("pageshow", function () {
     
     var url = window.location.pathname;
     var filename = url.substring(url.lastIndexOf("/")+1);
+    console.log("pageshow "+filename);
     if(localStorage.login!="true" && filename != "login.html"){
         window.location.href = "login.html";
     } else {

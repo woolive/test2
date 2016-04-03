@@ -70,6 +70,11 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
     <plugin name="cordova-plugin-geolocation" spec="1.0.1" source="pgb" />
+    <!-- https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/PHONEGAP_BUILD.md#additional-resources -->
+    <preference name="android-build-tool" value="gradle" />
+    <plugin name="phonegap-plugin-push" source="npm">
+	<param name="SENDER_ID" value="160246723100" />
+    </plugin>
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
